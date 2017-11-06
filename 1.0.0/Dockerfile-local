@@ -1,0 +1,75 @@
+FROM tomcat:7.0.82-jre8-alpine
+
+MAINTAINER AngryQuiz <angryquiz77@gmail.com>
+
+ENV QUESTION_REST_URL \
+	http://192.168.0.17:8000/question-rest-1.0.0.war
+
+ENV QUESTION_BANK_URL \
+	http://192.168.0.17:8000/question-bank-1.0.0.war
+
+ENV QUESTION_SETENV_URL \
+	http://192.168.0.17:8000/setenv.sh
+
+ENV QUESTION_FRONTEND_URL \
+	http://192.168.0.17:8000/angryquiz-1.0.0.war
+
+
+RUN set -eux; \
+#	\
+#	apk add --no-cache --virtual .fetch-deps \
+#		ca-certificates \
+#		openssl \
+#	; \
+	\
+	success=; \
+	for url in $QUESTION_REST_URL; do \
+			if wget -O question-rest.war "$url"; then \
+				success=1; \
+				break; \
+			fi; \
+	done; \
+	[ -n "$success" ]; \
+	\
+	success=; \
+	for url in $QUESTION_BANK_URL; do \
+			if wget -O question-bank.war "$url"; then \
+				success=1; \
+				break; \
+			fi; \
+	done; \
+	[ -n "$success" ]; \
+	\
+	success=; \
+	for url in $QUESTION_SETENV_URL; do \
+			if wget -O setenv.sh "$url"; then \
+				success=1; \
+				break; \
+			fi; \
+	done; \
+	[ -n "$success" ]; \
+	\
+	success=; \
+	for url in $QUESTION_FRONTEND_URL; do \
+			if wget -O ROOT.war "$url"; then \
+				success=1; \
+				break; \
+			fi; \
+	done; \
+	[ -n "$success" ]; \
+	\
+	cp $CATALINA_HOME/question-rest.war $CATALINA_HOME/webapps; \
+	cp $CATALINA_HOME/question-bank.war $CATALINA_HOME/webapps; \
+	rm -rf $CATALINA_HOME/webapps/ROOT; \
+	cp $CATALINA_HOME/ROOT.war $CATALINA_HOME/webapps; \
+	cp $CATALINA_HOME/setenv.sh $CATALINA_HOME/bin; \
+	\
+	rm $CATALINA_HOME/question-rest.war; \
+	rm $CATALINA_HOME/question-bank.war; \
+	rm $CATALINA_HOME/ROOT.war; \
+	[ -n "$success" ]; 
+
+
+
+
+
