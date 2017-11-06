@@ -6,7 +6,7 @@ ENV QUESTION_REST_URL \
 	https://github.com/angryquiz/maven-repo/raw/master/com/question/rest/question-rest/1.0.0/question-rest-1.0.0.war
 
 ENV QUESTION_BANK_URL \
-	https://github.com/angryquiz/maven-repo/raw/master/com/question/web/question-web/1.0.0/question-web-1.0.0.war
+	https://github.com/angryquiz/maven-repo/raw/master/com/questionbank/app/question-bank/1.0.0/question-bank-1.0.0.war
 
 ENV QUESTION_SETENV_URL \
 	https://raw.githubusercontent.com/angryquiz/docker/master/setenv.sh
