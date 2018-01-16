@@ -2,7 +2,7 @@
 
 #https://gist.github.com/terrancesnyder/986029
 
-export JAVA_OPTS="$JAVA_OPTS -DredisServer=angryquizhost -DredisPort=6379 -DquestionRestEndpoint=http://angryquizhost:8080/question-rest -DelasticSearchUrl=http://angryquizhost:9200 "
+export JAVA_OPTS="$JAVA_OPTS -DredisServer=angryquizhost -DredisPort=6379 -DquestionRestEndpoint=http://angryquizhost/question-rest -DelasticSearchUrl=http://angryquizhost:9200 "
 
 echo "Using CATALINA_OPTS:"
 for arg in $CATALINA_OPTS
