@@ -5,7 +5,8 @@ Docker Build
 
 * docker-compose up -d (detached)
 * docker-compose ps (status)
-* docker-compose stop (stop)
+* docker-compose stop 
+* docker-compose start 
 * docker-compose down --volumes (remove the data volume)
 
 ### Delete all docker containers
